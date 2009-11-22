@@ -1,13 +1,13 @@
-var m = {
-	INSERT_MODE : 0,
-	COMMAND_MODE : 1,
+var Mode = function() {
+	this.INSERT_MODE = 0;
+	this.COMMAND_MODE = 1;
+	this.mode = this.INSERT_MODE;
 
-	isInsert : function() { return this.mode == this.INSERT_MODE },
-	isCommand : function() { return this.mode == this.COMMAND_MODE },
-	setMode : function(mode) { this.mode = mode }
-
-};
-m.setMode(m.INSERT_MODE)
+	this.isInsert = function() { return this.mode == this.INSERT_MODE; };
+	this.isCommand = function() { return this.mode == this.COMMAND_MODE; };
+	this.setMode = function(mode) { this.mode = mode; };
+}
+var m = new Mode;
 
 var textareaKeydown = function(e) {
 
