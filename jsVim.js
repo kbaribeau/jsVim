@@ -1,24 +1,39 @@
-var INSERT_MODE = 0;
-var COMMAND_MODE = 1;
-var mode = INSERT_MODE;
+function Modes() {
+	this.INSERT_MODE = 0;
+	this.COMMAND_MODE = 1;
+	this.mode = this.INSERT_MODE;
+
+}
+Modes.prototype.isInsert = function() {
+	return this.mode == this.INSERT_MODE;
+}
+
+Modes.prototype.isCommand = function() {
+	return this.mode == this.COMMAND_MODE;
+}
+
+var m = new Modes;
+
 var textareaKeydown = function(e) {
-	if (mode == COMMAND_MODE) {
+
+	if (m.isCommand()) {
 		e.preventDefault(); // not under test
 		if (e.keyCode == 73) { // 73 == 'i'
-				mode = INSERT_MODE;
+				m.mode = m.INSERT_MODE;
 		}
 		else {
 			textarea.value = '';
 		}
 	}
-	else if (mode == INSERT_MODE) {
+	else if (m.isInsert()) {
 		// ESC, 27
 		// 91, [
 		if (e.ctrlKey && e.keyCode == 91 || e.keyCode == 27) {
-				mode = COMMAND_MODE;
+				m.mode = m.COMMAND_MODE;
 		}
 	}
 };
 
 var textarea = document.getElementsByTagName("textarea")[0];
 textarea.addEventListener("keydown", textareaKeydown, true);
+
