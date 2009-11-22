@@ -11,6 +11,9 @@ Modes.prototype.isInsert = function() {
 Modes.prototype.isCommand = function() {
 	return this.mode == this.COMMAND_MODE;
 }
+Modes.prototype.setMode = function(mode) {
+	this.mode = mode;
+}
 
 var m = new Modes;
 
@@ -19,7 +22,7 @@ var textareaKeydown = function(e) {
 	if (m.isCommand()) {
 		e.preventDefault(); // not under test
 		if (e.keyCode == 73) { // 73 == 'i'
-				m.mode = m.INSERT_MODE;
+				m.setMode(m.INSERT_MODE);
 		}
 		else {
 			textarea.value = '';
@@ -29,7 +32,7 @@ var textareaKeydown = function(e) {
 		// ESC, 27
 		// 91, [
 		if (e.ctrlKey && e.keyCode == 91 || e.keyCode == 27) {
-				m.mode = m.COMMAND_MODE;
+				m.setMode(m.COMMAND_MODE);
 		}
 	}
 };
