@@ -1,22 +1,25 @@
-var Mode = function() {
-	this.INSERT_MODE = 0;
-	this.COMMAND_MODE = 1;
-	this.mode = this.INSERT_MODE;
+var INSERT_MODE = 0;
+var COMMAND_MODE = 1;
 
-	this.isInsert = function() { return this.mode == this.INSERT_MODE; };
-	this.isCommand = function() { return this.mode == this.COMMAND_MODE; };
+var Mode = function() {
+	this.mode = INSERT_MODE;
+
+	this.isInsert = function() { return this.mode == INSERT_MODE; };
+	this.isCommand = function() { return this.mode == COMMAND_MODE; };
 	this.setMode = function(mode) { this.mode = mode; };
 };
 
-var CommandModeHandler = function() {
+var CommandModeHandler = function(editor) {
+	this.editor = editor
 	this.handle = function(e) {
 			e.preventDefault(); // not under test
 			if (e.keyCode == 73) { // 73 == 'i'
-					return this.mode.INSERT_MODE;
+					return INSERT_MODE;
 			}
 			else {
-				textarea.value = '';
+				editor.value = '';
 			}
+			return COMMAND_MODE;
 	}
 }
 
@@ -32,16 +35,16 @@ var Dispatcher = function(m, c) {
 			// ESC, 27
 			// 91, [
 			if (e.ctrlKey && e.keyCode == 91 || e.keyCode == 27) {
-					this.mode.setMode(this.mode.COMMAND_MODE);
+					this.mode.setMode(COMMAND_MODE);
 			}
 		}
 	};
 };
 
-var dispatcher = new Dispatcher(new Mode, new CommandModeHandler);
+var textarea = document.getElementsByTagName("textarea")[0];
+var dispatcher = new Dispatcher(new Mode, new CommandModeHandler(textarea));
+
 var textareaKeydown = function(e) {
 	dispatcher.dispatch(e);
 };
-
-var textarea = document.getElementsByTagName("textarea")[0];
 textarea.addEventListener("keydown", textareaKeydown, true);

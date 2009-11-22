@@ -23,5 +23,13 @@ module JsVimSeleniumTest
 			@selenium.type_keys textarea, "d"
 			@selenium.get_value(textarea).should == "d" #works manually, not sure why selenium repots it differently 
 		end
+
+		#FIXME: repetition (use cucumber?)
+		it "should be repeatable" do
+			textarea = "document.forms[0].elements[1]"
+			@selenium.type textarea, "asdf"
+			@selenium.type_keys textarea, "d"
+			@selenium.get_value(textarea).should == "d" 
+		end
 	end
 end
