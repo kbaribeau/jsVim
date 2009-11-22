@@ -2,13 +2,12 @@ var m = {
 	INSERT_MODE : 0,
 	COMMAND_MODE : 1,
 
-	mode : 0,
-
 	isInsert : function() { return this.mode == this.INSERT_MODE },
 	isCommand : function() { return this.mode == this.COMMAND_MODE },
 	setMode : function(mode) { this.mode = mode }
 
 };
+m.setMode(m.INSERT_MODE)
 
 var textareaKeydown = function(e) {
 
@@ -32,4 +31,3 @@ var textareaKeydown = function(e) {
 
 var textarea = document.getElementsByTagName("textarea")[0];
 textarea.addEventListener("keydown", textareaKeydown, true);
-

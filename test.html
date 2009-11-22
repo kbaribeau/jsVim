@@ -2,8 +2,38 @@
 	<head>
 		<script src="http://yui.yahooapis.com/3.0.0/build/yui/yui-min.js"></script> 
 		<script src="spec/jsVim/jsVimTest.js"></script> 
+		<link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/3.0.0/build/cssfonts/fonts-min.css" />
+		<style type="text/css">
+			body { margin: 0; padding: 0; }
+		</style>
+		<style type="text/css">
+			#testLogger {
+				margin-bottom: 1em;
+			}
+
+			#testLogger .yui-console .yui-console-title {
+				border: 0 none;
+				color: #000;
+				font-size: 13px;
+				font-weight: bold;
+				margin: 0;
+				text-transform: none;
+			}
+			#testLogger .yui-console .yui-console-entry-meta {
+				margin: 0;
+			}
+			.yui-skin-sam .yui-console-entry-fail .yui-console-entry-cat {
+				background: #f00;
+			}
+
+			.yui-skin-sam .yui-console-entry-pass .yui-console-entry-cat {
+				background: #070;
+				color: #fff;
+			}
+		</style>
+
 	</head>
-	<body>
+	<body class="yui-skin-sam">
 		<form>
 			<div style='padding: 20;'>
 				<input type='text' />
@@ -11,6 +41,7 @@
 			<div style='padding: 20;'>
 				<textarea rows='20'></textarea>
 			</div>
+			<div id="testLogger"></div>
 		</form>
 		<script type='text/javascript' src='jsVim.js'></script>
 	</body>
