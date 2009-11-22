@@ -1,21 +1,14 @@
-function Modes() {
-	this.INSERT_MODE = 0;
-	this.COMMAND_MODE = 1;
-	this.mode = this.INSERT_MODE;
+var m = {
+	INSERT_MODE : 0,
+	COMMAND_MODE : 1,
 
-}
-Modes.prototype.isInsert = function() {
-	return this.mode == this.INSERT_MODE;
-}
+	mode : 0,
 
-Modes.prototype.isCommand = function() {
-	return this.mode == this.COMMAND_MODE;
-}
-Modes.prototype.setMode = function(mode) {
-	this.mode = mode;
-}
+	isInsert : function() { return this.mode == this.INSERT_MODE },
+	isCommand : function() { return this.mode == this.COMMAND_MODE },
+	setMode : function(mode) { this.mode = mode }
 
-var m = new Modes;
+};
 
 var textareaKeydown = function(e) {
 
