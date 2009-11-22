@@ -9,7 +9,7 @@ var Mode = function() {
 	this.setMode = function(mode) { this.mode = mode; };
 };
 
-var CommandModeHandler = function(editor) {
+var NormalModeHandler = function(editor) {
 	this.editor = editor
 	this.handle = function(e) {
 			e.preventDefault(); // not under test
@@ -25,11 +25,11 @@ var CommandModeHandler = function(editor) {
 
 var Dispatcher = function(m, c) {
 	this.mode = m;
-	this.commandModeHandler = c;
+	this.normalModeHandler = c;
 	this.dispatch = function(e) {
 		if (this.mode.isCommand()) {
 			this.mode.setMode(
-				this.commandModeHandler.handle(e));
+				this.normalModeHandler.handle(e));
 		}
 		else if (this.mode.isInsert()) {
 			// ESC, 27
@@ -42,7 +42,7 @@ var Dispatcher = function(m, c) {
 };
 
 var textarea = document.getElementsByTagName("textarea")[0];
-var dispatcher = new Dispatcher(new Mode, new CommandModeHandler(textarea));
+var dispatcher = new Dispatcher(new Mode, new NormalModeHandler(textarea));
 
 var textareaKeydown = function(e) {
 	dispatcher.dispatch(e);
