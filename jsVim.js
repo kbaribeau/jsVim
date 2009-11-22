@@ -1,11 +1,11 @@
 var INSERT_MODE = 0;
-var COMMAND_MODE = 1;
+var NORMAL_MODE = 1;
 
 var Mode = function() {
 	this.mode = INSERT_MODE;
 
 	this.isInsert = function() { return this.mode == INSERT_MODE; };
-	this.isCommand = function() { return this.mode == COMMAND_MODE; };
+	this.isCommand = function() { return this.mode == NORMAL_MODE; };
 	this.setMode = function(mode) { this.mode = mode; };
 };
 
@@ -19,7 +19,7 @@ var NormalModeHandler = function(editor) {
 			else {
 				editor.value = '';
 			}
-			return COMMAND_MODE;
+			return NORMAL_MODE;
 	}
 }
 
@@ -35,7 +35,7 @@ var Dispatcher = function(m, c) {
 			// ESC, 27
 			// 91, [
 			if (e.ctrlKey && e.keyCode == 91 || e.keyCode == 27) {
-					this.mode.setMode(COMMAND_MODE);
+					this.mode.setMode(NORMAL_MODE);
 			}
 		}
 	};
