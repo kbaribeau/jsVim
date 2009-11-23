@@ -13,13 +13,21 @@ var NormalModeHandler = function(editor) {
 	this.editor = editor
 	this.handle = function(e) {
 			e.preventDefault(); // not under test
-			if (e.keyCode == 73) { // 73 == 'i'
+			this.doAction(e.keyCode);
+			return this.checkMode(e.keyCode);
+	}
+
+	this.checkMode = function(keyCode) {
+			if (keyCode == 73) { // 73 == 'i'
 					return INSERT_MODE;
 			}
 			else {
-				editor.value = '';
+				return NORMAL_MODE;
 			}
-			return NORMAL_MODE;
+	}
+
+	this.doAction = function(keyCode) {
+			editor.value = '';
 	}
 }
 
