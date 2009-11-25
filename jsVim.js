@@ -14,11 +14,15 @@ var NormalModeHandler = function(editor) {
 	this.handle = function(e) {
 			e.preventDefault(); // not under test
 			this.doAction(e.keyCode);
-			return this.checkMode(e.keyCode);
+			return this.checkMode(String.fromCharCode(e.keyCode));
 	}
 
-	this.checkMode = function(keyCode) {
-			if (keyCode == 73) { // 73 == 'i'
+	this.checkMode = function(key) {
+			if (
+				key == 'i' || 
+				key == 'o' || 
+				key == 'a'
+				) {
 					return INSERT_MODE;
 			}
 			else {
