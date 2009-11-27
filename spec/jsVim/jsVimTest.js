@@ -31,9 +31,10 @@ YUI({
 		},
 
 		testCheckMode_shouldFlipToInsertModeOnIOA : function() {
-			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('i'), 'i');
-			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('o'), 'o');
-			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('a'), 'a');
+			//FIXME: having to use caps here is odd
+			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('I'), 'i');
+			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('O'), 'o');
+			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('A'), 'a');
 		}
 
 

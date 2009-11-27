@@ -9,37 +9,41 @@ var Mode = function() {
 	this.setMode = function(mode) { this.mode = mode; };
 };
 
-//FIXME: use the value of the keystroke instead of the keyCode of the key being pressed
-var NormalModeHandler = function(editor) {
-	this.editor = editor
-	this.handle = function(e) {
-			e.preventDefault(); // not under test
-			this.doAction(e.keyCode);
-			return this.checkMode(String.fromCharCode(e.keyCode));
-	}
+var NormalModeHandler = Class.create({
+	initialize: function(e) {
+		this.editor = e;
+	},
 
-	this.checkMode = function(keyCode) {
+	handle : function(evnt) {
+			evnt.preventDefault(); // not under test
+			this.doAction(evnt.keyCode);
+			return this.checkMode(String.fromCharCode(evnt.keyCode));
+	},
+
+	checkMode : function(keyCode) {
 			if (
-				keyCode == 'i' || 
-				keyCode == 'o' || 
-				keyCode == 'a' 
+				keyCode == 'I' || 
+				keyCode == 'O' || 
+				keyCode == 'A' 
 				) {
 					return INSERT_MODE;
 			}
 			else {
 				return NORMAL_MODE;
 			}
-	}
+	},
 
-	this.doAction = function(keyCode) {
-			editor.value = '';
+	doAction : function(keyCode) {
+			this.editor.value = '';
 	}
-}
+});
 
-var Dispatcher = function(m, c) {
-	this.mode = m;
-	this.normalModeHandler = c;
-	this.dispatch = function(e) {
+var Dispatcher = Class.create({
+	initialize: function(m, c) {
+		this.mode = m;
+		this.normalModeHandler = c;
+	},
+	dispatch : function(e) {
 		if (this.mode.isCommand()) {
 			this.mode.setMode(
 				this.normalModeHandler.handle(e));
@@ -51,8 +55,8 @@ var Dispatcher = function(m, c) {
 					this.mode.setMode(NORMAL_MODE);
 			}
 		}
-	};
-};
+	}
+});
 
 var textarea = document.getElementsByTagName("textarea")[0];
 var dispatcher = new Dispatcher(new Mode, new NormalModeHandler(textarea));
