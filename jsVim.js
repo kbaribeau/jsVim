@@ -9,6 +9,7 @@ var Mode = function() {
 	this.setMode = function(mode) { this.mode = mode; };
 };
 
+//FIXME: use the value of the keystroke instead of the keyCode of the key being pressed
 var NormalModeHandler = function(editor) {
 	this.editor = editor
 	this.handle = function(e) {
@@ -17,11 +18,11 @@ var NormalModeHandler = function(editor) {
 			return this.checkMode(String.fromCharCode(e.keyCode));
 	}
 
-	this.checkMode = function(key) {
+	this.checkMode = function(keyCode) {
 			if (
-				key == 'i' || 
-				key == 'o' || 
-				key == 'a'
+				keyCode == 'i' || 
+				keyCode == 'o' || 
+				keyCode == 'a' 
 				) {
 					return INSERT_MODE;
 			}
