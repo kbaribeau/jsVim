@@ -31,10 +31,10 @@ YUI({
 		},
 
 		testCheckMode_shouldFlipToInsertModeOnIOA : function() {
-			//FIXME: having to use caps here is odd
-			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('I'), 'i');
-			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('O'), 'o');
-			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('A'), 'a');
+			//oddly, when we're bound to keydown instead of keypress, only caps work here
+			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('i'), 'i');
+			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('o'), 'o');
+			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('a'), 'a');
 		}
 
 

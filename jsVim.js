@@ -15,6 +15,7 @@ var NormalModeHandler = Class.create({
 	},
 
 	handle : function(evnt) {
+			evnt.stopPropagation();
 			evnt.preventDefault(); // not under test
 			this.doAction(evnt.keyCode);
 			return this.checkMode(String.fromCharCode(evnt.keyCode));
@@ -22,9 +23,9 @@ var NormalModeHandler = Class.create({
 
 	checkMode : function(keyCode) {
 			if (
-				keyCode == 'I' || 
-				keyCode == 'O' || 
-				keyCode == 'A' 
+				keyCode == 'i' || 
+				keyCode == 'o' || 
+				keyCode == 'a' 
 				) {
 					return INSERT_MODE;
 			}
@@ -64,4 +65,7 @@ var dispatcher = new Dispatcher(new Mode, new NormalModeHandler(textarea));
 var textareaKeydown = function(e) {
 	dispatcher.dispatch(e);
 };
-textarea.addEventListener("keydown", textareaKeydown, true);
+
+//FIXME/TODO: keydown doesn't work for some reason, but keypress is deprecated in DOM level 3
+//see: http://www.w3.org/TR/DOM-Level-3-Events/#event-type-keypress
+textarea.addEventListener("keypress", textareaKeydown, true);
