@@ -7,7 +7,7 @@ When /I type in "(.*)"/ do |text|
 	@browser.type_keys(@textarea_locator, text)
 end
 
-And /press Escape/ do 
+And /I press Escape/ do 
 	@browser.key_press(@textarea_locator, 27)
 end
 
@@ -19,4 +19,8 @@ end
 
 Then /the text box should be empty/ do
 	@browser.get_value(@textarea_locator).should == "" 
+end
+
+Then /the cursor should have moved to the right one space/ do
+	@browser.js_eval('this.browserbot.findElement("id=textarea").selectionStart').should == 1
 end

@@ -16,16 +16,16 @@ var NormalModeHandler = Class.create({
 
 	handle : function(evnt) {
 			evnt.stopPropagation();
-			evnt.preventDefault(); // not under test
+			evnt.preventDefault(); 
 			this.doAction(evnt.keyCode);
 			return this.checkMode(String.fromCharCode(evnt.keyCode));
 	},
 
-	checkMode : function(keyCode) {
+	checkMode : function(key) {
 			if (
-				keyCode == 'i' || 
-				keyCode == 'o' || 
-				keyCode == 'a' 
+				key == 'i' || 
+				key == 'o' || 
+				key == 'a' 
 				) {
 					return INSERT_MODE;
 			}
@@ -34,8 +34,13 @@ var NormalModeHandler = Class.create({
 			}
 	},
 
-	doAction : function(keyCode) {
-			this.editor.value = '';
+	doAction : function(key) {
+			if (key == 'd') {
+				this.editor.value = '';
+			}
+			else if (key == 'l') {
+				this.editor.selectionStart += 1;
+			}
 	}
 });
 

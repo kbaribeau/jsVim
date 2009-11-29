@@ -35,6 +35,24 @@ YUI({
 			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('i'), 'i');
 			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('o'), 'o');
 			Y.Assert.areEqual(INSERT_MODE, this.handler.checkMode('a'), 'a');
+		},
+
+		testDoAction_shouldDeleteOnD: function() {
+			var MockElement = Class.create({
+				initialize: function(v) {
+					this.value = v;
+				}
+			});
+
+			var handler = new NormalModeHandler(new MockElement('asdf'));
+
+			handler.doAction('d');
+
+			Y.Assert.areEqual('', handler.editor.value);
+		},
+
+		testDoAction_shouldMoveRightOnL: function() {
+
 		}
 
 
