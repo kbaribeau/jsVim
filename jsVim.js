@@ -15,9 +15,9 @@ var NormalModeHandler = Class.create({
 	},
 
 	handle : function(evnt) {
-			evnt.stopPropagation();
+			//evnt.stopPropagation(); //breaks mock
 			evnt.preventDefault(); 
-			this.doAction(evnt.keyCode);
+			this.doAction(String.fromCharCode(evnt.keyCode));
 			return this.checkMode(String.fromCharCode(evnt.keyCode));
 	},
 
@@ -35,7 +35,7 @@ var NormalModeHandler = Class.create({
 	},
 
 	doAction : function(key) {
-			if (key == 'd') {
+			if (key == 'D') {
 				this.editor.value = '';
 			}
 			else if (key == 'l') {

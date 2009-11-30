@@ -19,10 +19,6 @@ YUI({
 			Y.Mock.verify(mockEvent); 
 		}, 
 
-		testHandle_shouldCallCheckMode: function() {
-
-		},
-
 		testCheckMode_shouldMaintainNormalModeOnMotionKeys : function() {
 			Y.Assert.areEqual(NORMAL_MODE, this.handler.checkMode('h'), 'h');
 			Y.Assert.areEqual(NORMAL_MODE, this.handler.checkMode('j'), 'j');
@@ -46,14 +42,10 @@ YUI({
 
 			var handler = new NormalModeHandler(new MockElement('asdf'));
 
-			handler.doAction('d');
+			handler.doAction('D');
 
 			Y.Assert.areEqual('', handler.editor.value);
 		},
-
-		testDoAction_shouldMoveRightOnL: function() {
-
-		}
 
 
 	}); 
